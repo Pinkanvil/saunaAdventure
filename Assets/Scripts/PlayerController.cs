@@ -76,7 +76,10 @@ public class PlayerController : MonoBehaviour
     private void Flip() 
     {
         isFacingRight = !isFacingRight;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
+        // K‰‰nnet‰‰n pelaaja
+        transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1, 1);
+        // Vanha versio pelaajan k‰‰nt‰misest‰
+        //transform.Rotate(0.0f, 180.0f, 0.0f); 
     }
 
 }
