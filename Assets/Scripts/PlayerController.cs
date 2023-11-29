@@ -9,11 +9,19 @@ public class PlayerController : MonoBehaviour
     private float movementInputDirection;
 
     private bool isFacingRight = true;
+    private bool isGrounded;
+    private bool canJump;
 
     private Rigidbody2D rb;
 
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
+    public float groundCheckRadius;
+    public float variableJumpHeightMultiplier = 0.5f;
+
+    public Transform groundCheck;
+
+    public LayerMask whatIsGround;
 
 
     // Start is called before the first frame update
@@ -28,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckInput();
         CheckMovementDirection();
+        CheckIfCanJump();
 
         
     }
@@ -35,6 +44,24 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement();
+        CheckSurroundings();
+    }
+
+    private void CheckSurroundings() 
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+    }
+
+    private void CheckIfCanJump()
+    {
+        if (isGrounded && rb.velocity.y <= 0) 
+        {
+            canJump = true;
+        }
+        else 
+        {
+            canJump = false;
+        }
     }
 
     private void CheckMovementDirection()
@@ -59,12 +86,21 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        if (Input.GetButtonUp("Jump")) 
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+        }
+
         
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        if(canJump)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+        
     }
 
     private void ApplyMovement() 
@@ -80,6 +116,11 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1, 1);
         // Vanha versio pelaajan kääntämisestä
         //transform.Rotate(0.0f, 180.0f, 0.0f); 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
 }
