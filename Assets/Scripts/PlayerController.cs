@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +40,9 @@ public class PlayerController : MonoBehaviour
         CheckInput();
         CheckMovementDirection();
         CheckIfCanJump();
-
         
     }
+
 
     private void FixedUpdate()
     {
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckIfCanJump()
     {
-        if (isGrounded && rb.velocity.y <= 0) 
+        if (isGrounded /*&& rb.velocity.y <= 0*/) 
         {
             canJump = true;
         }
