@@ -11556,7 +11556,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  pHealth: {fileID: 1208761592}
+  pHealth: {fileID: 0}
   damage: 1
 --- !u!4 &1124707767
 Transform:
@@ -11696,7 +11696,6 @@ GameObject:
   - component: {fileID: 1208761586}
   - component: {fileID: 1208761590}
   - component: {fileID: 1208761591}
-  - component: {fileID: 1208761592}
   m_Layer: 8
   m_Name: Testiukko
   m_TagString: Player
@@ -11866,18 +11865,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
 --- !u!114 &1208761591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208761585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91abfa6c288645c4eacd90ccd48213f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1208761592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

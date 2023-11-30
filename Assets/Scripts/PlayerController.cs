@@ -13,6 +13,13 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool canJump;
 
+    private bool canDodge = true;
+    private bool isDodging;
+    private float dodgingPower = -24f;
+    private float dodgingTime = 0.1f;
+    private float dodgingCooldown = 1f;
+
+
     private Rigidbody2D rb;
 
     public float movementSpeed = 10.0f;
@@ -31,37 +38,53 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isDodging)
+        {
+            return;
+        }
+
+
         CheckInput();
         CheckMovementDirection();
         CheckIfCanJump();
-        
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDodge)
+        {
+            StartCoroutine(Dodge());
+        }
+
     }
 
 
     private void FixedUpdate()
     {
+        if (isDodging)
+        {
+            return;
+        }
+
         ApplyMovement();
         CheckSurroundings();
     }
 
-    private void CheckSurroundings() 
+    private void CheckSurroundings()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 
     private void CheckIfCanJump()
     {
-        if (isGrounded /*&& rb.velocity.y <= 0*/) 
+        if (isGrounded /*&& rb.velocity.y <= 0*/)
         {
             canJump = true;
         }
-        else 
+        else
         {
             canJump = false;
         }
@@ -69,50 +92,50 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementDirection()
     {
-        if(isFacingRight && movementInputDirection < 0) 
+        if (isFacingRight && movementInputDirection < 0)
         {
             Flip();
         }
-        else if(!isFacingRight && movementInputDirection > 0) 
+        else if (!isFacingRight && movementInputDirection > 0)
         {
             Flip();
         }
-        
+
     }
 
     private void CheckInput()
     {
         movementInputDirection = Input.GetAxisRaw("Horizontal");
 
-        if(Input.GetButtonDown("Jump")) 
+        if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
 
-        if (Input.GetButtonUp("Jump")) 
+        if (Input.GetButtonUp("Jump"))
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
         }
 
-        
+
     }
 
     private void Jump()
     {
-        if(canJump)
+        if (canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-        
+
     }
 
-    private void ApplyMovement() 
+    private void ApplyMovement()
     {
         rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
-    
+
     }
 
-    private void Flip() 
+    private void Flip()
     {
         isFacingRight = !isFacingRight;
         // K‰‰nnet‰‰n pelaaja
@@ -120,6 +143,27 @@ public class PlayerController : MonoBehaviour
         // Vanha versio pelaajan k‰‰nt‰misest‰
         //transform.Rotate(0.0f, 180.0f, 0.0f); 
     }
+
+
+    // Alternate dodge method
+    private IEnumerator Dodge()
+    {
+        canDodge = false;
+        isDodging = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(transform.localScale.x * dodgingPower, 0f);
+        yield return new WaitForSeconds(dodgingTime);
+        rb.gravityScale = originalGravity;
+        isDodging = false;
+        yield return new WaitForSeconds(dodgingCooldown);
+        canDodge = true;
+    }
+
+
+
+
+
 
     private void OnDrawGizmos()
     {
