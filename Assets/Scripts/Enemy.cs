@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
 
     public Health pHealth;
-    public float damage;
+    public int damage;
 
 
     // Start is called before the first frame update

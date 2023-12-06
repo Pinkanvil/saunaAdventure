@@ -8,8 +8,11 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public float maxHealth = 3;
-    public float currentHealth;
+    public int maxHealth = 3;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+    
 
     // Debug dataa varten
     public GUIStyle myStyle;
@@ -22,11 +25,16 @@ public class Health : MonoBehaviour
 
 
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
+
     }
 
     void TakeDamage(int amount)
     {
         currentHealth -= amount;
+
+        healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
