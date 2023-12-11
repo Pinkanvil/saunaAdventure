@@ -140,41 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126ac252c62a6644cb343ccd47deb19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &42057209
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42057201}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.9375
 --- !u!1 &265940694
 GameObject:
   m_ObjectHideFlags: 0
@@ -19501,6 +19466,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3439116113755352748, guid: 7652ba0d0a3f11741bebf86312d0d233, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6b86ed2d3a745344d9cb0ddd4e96ae25, type: 2}
     - target: {fileID: 3809644374587771290, guid: 7652ba0d0a3f11741bebf86312d0d233, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -19572,9 +19541,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5846227922042373171, guid: 7652ba0d0a3f11741bebf86312d0d233, type: 3}
       insertIndex: -1
       addedObject: {fileID: 42057202}
-    - targetCorrespondingSourceObject: {fileID: 5846227922042373171, guid: 7652ba0d0a3f11741bebf86312d0d233, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 42057209}
   m_SourcePrefab: {fileID: 100100000, guid: 7652ba0d0a3f11741bebf86312d0d233, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
