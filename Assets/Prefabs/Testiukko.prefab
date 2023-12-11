@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 3439116113755352748}
   - component: {fileID: 2289683300282712885}
   - component: {fileID: 8013528648294717021}
+  - component: {fileID: 2509683700919843932}
   m_Layer: 8
   m_Name: Testiukko
   m_TagString: Player
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259853af3030d594dba65cb9108fe4ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   movementSpeed: 8
   jumpForce: 16
   groundCheckRadius: 0.4
@@ -319,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
+  healthBar: {fileID: 0}
   myStyle:
     m_Name: 
     m_Normal:
@@ -386,3 +389,24 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+--- !u!95 &2509683700919843932
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846227922042373171}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c0e09a31dd555949ba35d05ce8a0a30, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
 
     private float movementInputDirection;
 
+
     private bool isFacingRight = true;
+    private bool Walk;
     private bool isGrounded;
     private bool canJump;
 
@@ -19,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float dodgingTime = 0.1f;
     private float dodgingCooldown = 1f;
 
-
+    private Animator animator;
     private Rigidbody2D rb;
 
     public float movementSpeed = 10.0f;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
         CheckInput();
         CheckMovementDirection();
         CheckIfCanJump();
+        UpdateAnimations();
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDodge)
         {
@@ -101,7 +105,23 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
+        if(rb.velocity.x != 0)
+        {
+            Walk = true;
+        }
+        else
+        {
+            Walk = false;
+        }
+
     }
+
+    private void UpdateAnimations()
+    {
+        animator.SetBool("Walk", Walk);
+        animator.SetBool("isGrounded", isGrounded);
+    }
+
 
     private void CheckInput()
     {
@@ -125,14 +145,14 @@ public class PlayerController : MonoBehaviour
         if (canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
 
+        }
+     
     }
 
     private void ApplyMovement()
     {
         rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
-
     }
 
     private void Flip()
@@ -149,6 +169,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dodge()
     {
         canDodge = false;
+        animator.SetBool("Dodge", true);
         isDodging = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
@@ -158,6 +179,7 @@ public class PlayerController : MonoBehaviour
         isDodging = false;
         yield return new WaitForSeconds(dodgingCooldown);
         canDodge = true;
+        animator.SetBool("Dodge", false);
     }
 
 
