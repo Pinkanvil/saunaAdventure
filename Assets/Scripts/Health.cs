@@ -47,12 +47,7 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "TestiVihollinen")
-        {
-            gameObject.transform.parent = collision.gameObject.transform;
-            Destroy(GetComponent<Rigidbody2D>());
-            GetComponent<CircleCollider2D>().enabled = false;
-        }
+       
 
         if (collision.tag == "Player")
         {
